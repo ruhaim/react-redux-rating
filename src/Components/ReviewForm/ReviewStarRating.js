@@ -16,16 +16,19 @@ const styles = {
 class ReviewStarRating extends React.Component {
 
     onStarClick = (nextValue, prevValue) => {
-        console.log('onStarClick', nextValue, prevValue)
+        const {form,field} = this.props
+        form.setFieldValue(field.name,nextValue);
     }
 
     render() {
+        const {value} = this.props.field
         return (
             <Form.Group>
                 <Form.Label style={styles.label}>
                     Rating
                 </Form.Label>
                 <StarRatingComponent
+                    value={value}
                     name="star-rating"
                     onStarClick={this.onStarClick}
                 />

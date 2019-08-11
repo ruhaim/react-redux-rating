@@ -1,4 +1,5 @@
 import { addReview } from '../../Repos/reviewRepo';
+import { loadAllReviewsAction } from './loadAllReviewsRedux';
 import { createSlice } from 'redux-starter-kit';
 
 export const reviewSlice = createSlice({
@@ -6,13 +7,21 @@ export const reviewSlice = createSlice({
     initialState: {isLoading : false, data: {}, error:{}},
     reducers: {
       isLoading: (state, action)  => {return {...state, isLoading:true}},
-      success: (state, action)  => {return {...state, isLoading:false, data:action.payload.data}},
+      success: (state, action)  => {return {...state, isLoading:false, data:action.payload}},
       failure: (state, action) => {return {...state, isLoading:false, error:action.payload.data}}
     }
   })
 
-export const addReviewAction = (review) => (dispatch) => {
-    dispatch(reviewSlice.actions.isLoading())
-    addReview(review)
+export const addReviewAction = (review) => (dispatch, getStore) => {
+    const {isLoading,success, failure} = reviewSlice.actions;
+    dispatch(isLoading())
+    addReview(review).then(({data})=>{
+        dispatch(success(data))
+        const prevQueyData = getStore().reviewAllLoad.data.queryData;
+        debugger
+        loadAllReviewsAction(prevQueyData)
+    }).catch((error)=>{
+      dispatch(failure(error))
+    })
 
 } 
