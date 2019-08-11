@@ -10,12 +10,12 @@ const placeholder = {
 class Review extends React.Component {
     
     render() {
-        const {body, rating} = this.props.review || placeholder;
-        debugger
+        const {body, rating, id} = this.props.review || placeholder;
         return (
             <ListGroupItem>
                 <p>{ body }</p>
                 <StarRatingComponent
+                    name={`star-comp-${id}`}
                     value={rating}
                     editing={false}
                 />

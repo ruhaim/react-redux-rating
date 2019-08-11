@@ -6,16 +6,17 @@ export const reviewSlice = createSlice({
     initialState: {isLoading : false, data: null, error:null},
     reducers: {
       isLoading: (state, action)  => {return {...state, isLoading:true}},
-      success: (state, action)  => {return {...state, isLoading:false, data:action.payload.data}},
+      success: (state, action)  => {return {...state, isLoading:false, data:action.payload}},
       failure: (state, action) => {return {...state, isLoading:false, error:action.payload.data}}
     }
   })
 
-export const loadAllReviewsAction = () => (dispatch) => {
+export const loadAllReviewsAction = (queryData) => (dispatch) => {
     const {isLoading, success, failure} = reviewSlice.actions
     dispatch(isLoading())
-    loadAllReviews().then((data)=>{
-      dispatch(success(data))
+    return loadAllReviews(queryData).then(({data, headers, queryData})=>{
+      const totalItemCount = headers["x-total-count"];
+      dispatch(success({data,totalItemCount,queryData}))
     }).catch((err)=>{
       dispatch(failure(err))
     })
