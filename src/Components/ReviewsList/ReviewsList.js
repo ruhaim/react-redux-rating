@@ -4,6 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 import Review from './Review';
 import {loadAllReviewsAction} from '../../Redux/reviewRedux/loadAllReviewsRedux'
 import ReactPaginate from 'react-paginate';
+import { Pagination } from './Pagination';
 
 const styles = {
     wrapper: {
@@ -15,7 +16,7 @@ const styles = {
 class ReviewsList extends React.Component {
     state = {
         numItemsPerPage:5,
-        currentPage:0
+        currentPage:1
     }
     static getDerivedStateFromProps(props, state){
         if(props.data){
@@ -52,20 +53,11 @@ class ReviewsList extends React.Component {
                         return <Review key={review.id} review={review}/>
                     })}
                 </ListGroup>
-                {data && <ReactPaginate
-                    previousLabel={'previous'}
-                    nextLabel={'next'}
-                    breakLabel={'...'}
-                    breakClassName={'break-me'}
+                {data && <Pagination 
                     pageCount={this.state.numTotalPages}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}
-                    containerClassName={'pagination'}
-                    subContainerClassName={'pages pagination'}
-                    activeClassName={'active'}
                 />}
-
+                
                 <p>Example:</p>
                 <Review />
             </div>
