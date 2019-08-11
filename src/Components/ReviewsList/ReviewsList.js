@@ -42,8 +42,9 @@ class ReviewsList extends React.Component {
         })
     };
     onItemDeleteClick = (reviewId)=>{
-        this.setState({idsToDelete:{reviewId}}, async ()=>{
+        this.setState({idsToDelete:{[reviewId]:true}}, async ()=>{
             try{
+                
                 const data = await this.props.deleteReviewAction(reviewId)
                 const idsToDelete = {...this.state.idsToDelete}
                 delete idsToDelete[reviewId]

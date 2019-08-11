@@ -24,7 +24,7 @@ export const deleteReviewAction = (reviewId) => async (dispatch,getStore) => {
     }
     dispatch(success(data))
     const prevQueyData = getStore().reviewAllLoad.data.queryData;
-    dispatch(loadAllReviewsAction(prevQueyData))
+    await dispatch(loadAllReviewsAction(prevQueyData))
     toast.update(toastId, { render: "Delete Success", type: 'success', autoClose: 2000 });
     return data;
 

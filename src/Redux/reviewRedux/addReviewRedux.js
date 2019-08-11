@@ -22,7 +22,7 @@ export const addReviewAction = (review) => async (dispatch, getStore) => {
     const { data } = await addReview(review)
     dispatch(success(data))
     const prevQueyData = getStore().reviewAllLoad.data.queryData;
-    dispatch(loadAllReviewsAction(prevQueyData))
+    await dispatch(loadAllReviewsAction(prevQueyData))
     toast.update(toastId, { render: "Saved Successfully", type: 'success', autoClose: 2000 });
     return data;
   } catch (error) {
