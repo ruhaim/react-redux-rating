@@ -1,18 +1,5 @@
-import { createActions } from 'reduxsauce';
 import { deleteReview } from '../../Repos/reviewRepo';
 import { createSlice } from 'redux-starter-kit';
-
-const { Types, Creators } = createActions({
-    success: ['data'],
-    failure: ['error'],
-    isLoading: null,
-    custom:(a,b)=>(dispatch)=>{
-        console.log(a)
-    }
-  },
-   {prefix : "DELETE_REVIEW"}) 
-
-
 
 export const reviewSlice = createSlice({
     slice: 'reviewDelete', // slice is optional, and could be blank ''
