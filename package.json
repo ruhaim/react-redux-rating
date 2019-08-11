@@ -15,8 +15,7 @@
     "react-star-rating-component": "^1.4.1",
     "redux": "^4.0.4",
     "redux-starter-kit": "^0.6.3",
-    "redux-thunk": "^2.3.0",
-    "reduxsauce": "^1.1.0"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "api": "json-server db.json --port=3001 --watch",
