@@ -17,12 +17,12 @@ class App extends React.Component {
         return (
             <div className="container" style={styles()}>
                 <ToastContainer />
-
+                <Row>
                   <Col md={4} mdOffset={4}>
                     <ReviewForm />
                     <ReviewsList />
                   </Col>
-
+                </Row>
             </div>
         )
     }

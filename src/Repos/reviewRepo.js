@@ -1,5 +1,6 @@
 import axios from "axios";
 import {API_ENDPOINT_REVIEWS} from "../Consts/const"
+import '../Util/axiosInterceptor';
 
 export const addReview = async (review)=>{
     return await axios.post(API_ENDPOINT_REVIEWS,review)
