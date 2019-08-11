@@ -30,18 +30,17 @@ class ReviewForm extends React.Component {
 
     }
     onAddFormSubmit = async (values, actions)=>{
-        debugger
+
         //alert(JSON.stringify(values, null, 2));
         const {setSubmitting, resetForm} = actions
         try{
-            setSubmitting(false);
+            setSubmitting(true);
             const addResult = await this.props.addReviewAction(values)
             resetForm()
-            debugger
         }catch(error){
-
+            throw new Error(error)
         }finally{
-            setSubmitting(true);
+            setSubmitting(false);
         }
         
         
