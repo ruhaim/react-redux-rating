@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import { ErrorMessage } from 'formik';
 
 const styles = {
     textarea: {
@@ -16,6 +17,10 @@ class ReviewBody extends React.Component {
         return (
             <Form.Group controlId="formControlsTextarea">
                 <Form.Label>Body*</Form.Label>
+                <ErrorMessage name="body" 
+                              component="div" 
+                              className="invalid-feedback d-block" />
+                                        
                 <Form.Control as="textarea" 
                     rows="3" 
                     name = "body"

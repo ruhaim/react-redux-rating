@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import StarRatingComponent from 'react-star-rating-component';
+import { ErrorMessage } from 'formik';
 
 const styles = {
     label: {
@@ -27,6 +28,9 @@ class ReviewStarRating extends React.Component {
                 <Form.Label style={styles.label}>
                     Rating
                 </Form.Label>
+                <ErrorMessage name="rating" 
+                              component="div" 
+                              className="invalid-feedback d-block" />
                 <StarRatingComponent
                     value={value}
                     name="star-rating"

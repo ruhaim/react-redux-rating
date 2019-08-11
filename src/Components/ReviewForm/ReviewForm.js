@@ -57,11 +57,9 @@ class ReviewForm extends React.Component {
                             onSubmit={this.onAddFormSubmit}>
                             {
                                 ({isSubmitting })=> (
-                                    <Form>
+                                    <Form noValidate>
                                         <Field name="body" component={ReviewBody}/>
-                                        <ErrorMessage name="body" component="div"  />
                                         <Field name="rating" component={ReviewStarRating}/>
-                                        <ErrorMessage name="rating" component="div" />
                                         <Button 
                                             bsstyle="primary" 
                                             bssize="small" 
