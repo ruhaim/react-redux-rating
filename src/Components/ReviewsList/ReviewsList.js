@@ -3,7 +3,6 @@ import React from 'react'
 import { ListGroup } from 'react-bootstrap';
 import Review from './Review';
 import {loadAllReviewsAction} from '../../Redux/reviewRedux/loadAllReviewsRedux'
-import ReactPaginate from 'react-paginate';
 import { Pagination } from './Pagination';
 
 const styles = {
@@ -21,7 +20,7 @@ class ReviewsList extends React.Component {
     static getDerivedStateFromProps(props, state){
         if(props.data){
             return {
-                numTotalPages:Math.max(props.totalItemCount/state.numItemsPerPage)
+                numTotalPages:Math.ceil(props.totalItemCount/state.numItemsPerPage)
             }
         }
         return null;
