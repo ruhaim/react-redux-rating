@@ -4,18 +4,19 @@ import StarRatingComponent from 'react-star-rating-component';
 
 const placeholder = {
         "body": "Morbi mollis vehicula dolor at auctor.",
-        "stars": 5
+        "rating": 5
     }
 
 class Review extends React.Component {
-
+    
     render() {
+        const {body, rating} = this.props.review || placeholder;
+        debugger
         return (
             <ListGroupItem>
-                <p>{ placeholder.body }</p>
+                <p>{ body }</p>
                 <StarRatingComponent
-                    name="star-rating"
-                    value={placeholder.stars}
+                    value={rating}
                     editing={false}
                 />
             </ListGroupItem>
