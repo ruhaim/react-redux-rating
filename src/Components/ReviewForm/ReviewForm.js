@@ -15,6 +15,7 @@ const styles = {
 
 class ReviewForm extends React.Component {
 
+
     addFormValidate = (values)=>{
         const {body, rating } = values
         let errors = {};
@@ -28,11 +29,22 @@ class ReviewForm extends React.Component {
         return errors;
 
     }
-    onAddFormSubmit = (values, {setSubmitting})=>{
+    onAddFormSubmit = async (values, actions)=>{
         debugger
         //alert(JSON.stringify(values, null, 2));
-        this.props.addReviewAction(values)
-        //setSubmitting(false);
+        const {setSubmitting, resetForm} = actions
+        try{
+            setSubmitting(false);
+            const addResult = await this.props.addReviewAction(values)
+            resetForm()
+            debugger
+        }catch(error){
+
+        }finally{
+            setSubmitting(true);
+        }
+        
+        
 
     }
     render () {

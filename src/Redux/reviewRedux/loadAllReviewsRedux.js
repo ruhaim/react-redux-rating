@@ -11,14 +11,19 @@ export const reviewSlice = createSlice({
     }
   })
 
-export const loadAllReviewsAction = (queryData) => (dispatch, getStore) => {
+export const loadAllReviewsAction = (queryData) => async (dispatch, getStore) => {
     const {isLoading, success, failure} = reviewSlice.actions
     dispatch(isLoading())
-    return loadAllReviews(queryData).then(({data, headers})=>{
+    try{
+      const {data, headers} = await loadAllReviews(queryData)
       const totalItemCount = headers["x-total-count"];
-      dispatch(success({data,totalItemCount,queryData}))
-    }).catch((err)=>{
-      dispatch(failure(err))
-    })
+      const successPayload = {data,totalItemCount,queryData}
+      dispatch(success(successPayload))
+      return successPayload;
+    }catch(error){
+      dispatch(failure(error))
+      throw new Error(error)
+    }
+
 
 } 

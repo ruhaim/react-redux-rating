@@ -12,16 +12,23 @@ export const reviewSlice = createSlice({
     }
   })
 
-export const addReviewAction = (review) => (dispatch, getStore) => {
+export const addReviewAction = (review) => async (dispatch, getStore) => {
+    
     const {isLoading,success, failure} = reviewSlice.actions;
     dispatch(isLoading())
-    addReview(review).then(({data})=>{
-        dispatch(success(data))
-        const prevQueyData = getStore().reviewAllLoad.data.queryData;
-        debugger
-        loadAllReviewsAction(prevQueyData)
-    }).catch((error)=>{
+
+    try{
+      const {data} = await addReview(review)
+      dispatch(success(data))
+      const prevQueyData = getStore().reviewAllLoad.data.queryData;
+      loadAllReviewsAction(prevQueyData)
+      debugger
+      return data;
+    }catch(error){
       dispatch(failure(error))
-    })
+      throw new Error(error)
+    }
+
+
 
 } 
